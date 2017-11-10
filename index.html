@@ -93,7 +93,7 @@
     document.getElementById('titleInput').value = window.data.title;
     document.getElementById('questionInput').value = window.data.question;
     for (var i = 1; i <= window.data.answers.length; i++) {
-        document.getElementById('answer'+i).value = window.data.answers[i-1];
+        document.getElementById('answer'+i).value = window.data.answers[i-1].value;
     }
     document.getElementById('hintInput').value = window.data.question;
     document.getElementById('explanationInput').value = window.data.question;
