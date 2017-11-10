@@ -58,7 +58,7 @@
     function dataGetter() {
         var lastEdit = Date.now();
         var answers = [];
-        for (var i = 0; i < 5; i++) {
+        for (var i = 1; i <= 5; i++) {
             var value = document.getElementById('answer' + i).value;
             if (value !== undefined && value.length !== undefined && value.length > 0) {
                 answers.push({
@@ -92,8 +92,8 @@
     init();
     document.getElementById('titleInput').value = window.data.title;
     document.getElementById('questionInput').value = window.data.question;
-    for (var i = 0; i < window.data.answers.length; i++) {
-        document.getElementById('answer'+i).value = window.data.answers[i];
+    for (var i = 1; i <= window.data.answers.length; i++) {
+        document.getElementById('answer'+i).value = window.data.answers[i-1];
     }
     document.getElementById('hintInput').value = window.data.question;
     document.getElementById('explanationInput').value = window.data.question;
