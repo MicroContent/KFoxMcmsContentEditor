@@ -11,20 +11,92 @@
     </script>
 </head>
 <body>
-    <div>
-        <label for="titleInput">Enter Title:</label>
-        <input id="titleInput" type="text" />
-    </div>
-    <script type="application/javascript">
-        function dataGetter() {
-            return {
-                // return data object
-                title: document.getElementById('titleInput').value
+<div>
+    <p>
+        <label for="titleInput">Enter title:</label>
+        <input id="titleInput" type="text"/>
+    </p>
+    <p>
+        <label for="questionInput">Enter question:</label>
+        <input id="questionInput" type="text"/>
+    </p>
+    <p>
+        <label for="answer1">Enter answer option (empty ones are ignored):</label>
+        <input id="answer1" type="text"/>
+        <input title="correct?" id="answer1correct" type="checkbox"/>
+    </p>
+    <p>
+        <label for="answer2">Enter answer option (empty ones are ignored):</label>
+        <input id="answer2" type="text"/>
+        <input title="correct?" id="answer2correct" type="checkbox"/>
+    </p>
+    <p>
+        <label for="answer3">Enter answer option (empty ones are ignored):</label>
+        <input id="answer3" type="text"/>
+        <input title="correct?" id="answer3correct" type="checkbox"/>
+    </p>
+    <p>
+        <label for="answer4">Enter answer option (empty ones are ignored):</label>
+        <input id="answer4" type="text"/>
+        <input title="correct?" id="answer4correct" type="checkbox"/>
+    </p>
+    <p>
+        <label for="answer5">Enter answer option (empty ones are ignored):</label>
+        <input id="answer5" type="text"/>
+        <input title="correct?" id="answer5correct" type="checkbox"/>
+    </p>
+    <p>
+        <label for="hintInput">Enter hint:</label>
+        <textarea id="hintInput"></textarea>
+    </p>
+    <p>
+        <label for="explanationInput">Enter explanation:</label>
+        <textarea id="explanationInput"></textarea>
+    </p>
+</div>
+<script type="application/javascript">
+    function dataGetter() {
+        var lastEdit = Date.now();
+        var answers = [];
+        for (var i = 0; i < 5; i++) {
+            var value = document.getElementById('answer' + i).value;
+            if (value !== undefined && value.length !== undefined && value.length > 0) {
+                answers.push({
+                    value: value,
+                    correct: document.getElementById('answer' + i + 'correct').checked,
+                    lastEdit: lastEdit,
+                    id: i
+                });
             }
         }
+        return {
+            // return data object
+            title: document.getElementById('titleInput').value,
+            priority: 1,
+            type: 'MCMS',
+            question: document.getElementById('questionInput').value,
+            answers: answers,
+            questionContext: document.getElementById('hintInput').value,
+            answerContext: document.getElementById('explanationInput').value,
+            lastEdit: lastEdit,
+            id: 0,
+            lessonId: 0,
+            releaseStatus: 'PUBLIC',
+            editable: null,
+            learningStatus: 0,
+            skipStatus: 'NEVER_SKIPPABLE',
+            multimedia: []
+        }
+    }
 
-        init();
-        document.getElementById('titleInput').value = window.data.title;
-    </script>
+    init();
+    document.getElementById('titleInput').value = window.data.title;
+    document.getElementById('questionInput').value = window.data.question;
+    for (var i = 0; i < window.data.answers.length; i++) {
+        document.getElementById('answer'+i).value = window.data.answers[i];
+    }
+    document.getElementById('hintInput').value = window.data.question;
+    document.getElementById('explanationInput').value = window.data.question;
+</script>
 </body>
 </html>

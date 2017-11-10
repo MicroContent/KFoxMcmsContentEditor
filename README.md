@@ -1,1 +1,1 @@
-# AbstractContentEditor
+# KFoxMcmsContentEditor
