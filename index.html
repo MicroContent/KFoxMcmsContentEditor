@@ -85,7 +85,12 @@
             editable: null,
             learningStatus: 0,
             skipStatus: 'NEVER_SKIPPABLE',
-            multimedia: []
+            multimedia: [],
+            // preview metadata
+            description: document.getElementById('questionInput').value.replace(/<\/?[^>]+(>|$)/g, "")
+            + "\n" + answers.map(function (e, i) {
+                return "(" + (i + 1) + ") " + e.value
+            }).join("\n")
         }
     }
 
@@ -93,8 +98,8 @@
     document.getElementById('titleInput').value = window.data.title;
     document.getElementById('questionInput').value = window.data.question;
     for (var i = 1; i <= window.data.answers.length; i++) {
-        document.getElementById('answer'+i).value = window.data.answers[i-1].value;
-        document.getElementById('answer'+i+'correct').checked = window.data.answers[i-1].correct;
+        document.getElementById('answer' + i).value = window.data.answers[i - 1].value;
+        document.getElementById('answer' + i + 'correct').checked = window.data.answers[i - 1].correct;
     }
     document.getElementById('hintInput').value = window.data.questionContext;
     document.getElementById('explanationInput').value = window.data.answerContext;
